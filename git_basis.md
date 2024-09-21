@@ -26,9 +26,47 @@ C'est super... Mais comment ça marche exactement ?
 
 ## 2. Petite pause installation
 
+Avant de continuer, il va falloir installer Git sur votre ordinateur. Pour se faire, rendez-vous sur le site officiel de Git : [https://git-scm.com/](https://git-scm.com/). On va traiter ça en 2 partie : Windows et Linux.
+
+### 2.1. Windows
+![alt text](image-16.png)  
+Cliquez sur "Next"  
+![alt text](image-17.png)  
+Choisissez le dossier d'installation et cliquez sur "Next"  
+![alt text](image-18.png)  
+  
+![alt text](image-19.png)  
+  
+![alt text](image-21.png)  
+  
+![alt text](image-20.png)  
+  
+![alt text](image-22.png)  
+  
+![alt text](image-23.png)  
+  
+![alt text](image-24.png)  
+  
+![alt text](image-25.png)  
+  
+![alt text](image-26.png)  
+  
+![alt text](image-27.png)  
+  
+![alt text](image-28.png)  
+  
+![alt text](image-29.png)  
+  
+![alt text](image-30.png)  
+  
+![alt text](image-31.png)  
 
 
-Bon, super, vous avez installé Git, toute mes félicitations... Mais concrètement, comment ça marche ?
+### 2.2. Linux
+
+A voir avec les techniciens 
+
+   Bon, super, vous avez installé Git, toute mes félicitations... Mais concrètement, comment ça marche ?
 
 ## 3. Comment ça marche ?
 
@@ -200,8 +238,65 @@ Bah... Allez y quoi. C'est gratuit, c'est rapide et tout est expliqué sur le si
 
 ### 4.2 Configurer git pour Github
 
-Maintenant que c'est fait, on a quelques petites choses à faire pour que git et Github se comprennent.
+Avant de pouvoir envoyer vos fichiers sur Github, il va falloir dire à git qui vous êtes. Pour se faire, on va devoir configurer git et ya 2 choses à savoir :
+1. Il existe 3 niveau de configurations : local, global et system.
+2. La configuration n'est pas la même pour linux et windows (encore).
 
+Commmençons par décrire les différents niveaux de configuration ! 
+#### 4.2.1. Les niveaux de configuration
+- Local : la configuration est propre à un seul repos. Elle est stockée dans le dossier .git/config du repos.
+Elle est prioritaire sur les autres configurations.
+- global : la configuration est propre à un utilisateur. Elle est stockée dans le fichier .gitconfig de votre dossier utilisateur. 
+Elle est prioritaire sur la configuration system.
+- system : la configuration est propre à un ordinateur. Elle est stockée dans le fichier /etc/gitconfig de votre ordinateur.
+
+il faut donc noter que la configuration global est prioritaire sur la configuration system, et que la configuration local est prioritaire sur la configuration global.
+
+Ce qui signifie que :
+- la configuration system est la configuration par défaut de git et est appliqué à tous les utilisateurs de l'ordinateur qui se servent de git.
+- la configuration global est la configuration par défaut de git pour un utilisateur donné et elle est appliqué à tous les repos de cet utilisateur par défaut.
+- la configuration local est la configuration propre à un repos donné et elle est appliqué à ce repos uniquement. 
+
+Cela signifie que : plusieurs utilisateurs peuvent avoir leur propre configuration mais surtout qu'un même utilisateur peut avoir une configuration par projet.
+
+Maintenant que vous savez ça, passons à la configuration de votre git
+#### 4.2.2. Configurer basic de git
+
+Pour Linux ou windows, il faut d'abord renseigner votre username et votre email. Pour se faire, on va entrer les commandes suivantes dans un terminal git lancé dans le dossier de votre projet :
+1. `git config --<local|global|system> user.name "Votre nom sur github"` : renseigne votre nom
+2. `git config --<local|global|system> user.email "Votre email sur github"` : renseigne votre email
+
+Ici, je vous laisse le choix de la configuration que vous voulez utiliser. Pour ma part, je vous conseille la configuration global, au vu de la simplicité de la commande et de l'utilisation à venir que vous aurez de git. 
+
+Note : mettre `--local` ou ne rien mettre revient au même.
+
+Bien, c'est maintenant que linux et windows diverge. Pour windows, c'est terminer... Pour Linux, il vous reste une étape : la configuration de votre clé SSH. Avant de continuer, j'ajoute que cette étape peu également avoir lieu sur windows, mais je ne connais pas les cas d'utilisation de cette configuration.
+
+#### 4.2.3. Configurer votre clé SSH
+
+La clé SSH est une clé de sécurité qui permet de sécuriser les échanges entre votre ordinateur et Github. Pour se faire, on va devoir générer une clé SSH et la lier à votre compte Github. Pour se faire, suivez les instructions de Github : [https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh)
+
+1. On commence par générer une clé ssh dans un terminal et on la lie à son adresse mail github  avec la commande suivante : 
+`ssh-keygen -t ed25519 -C "your_email@example.com"`
+2. On choisi un fichier dans lequel stocker cette clé ssh quand ça nous est demandé ou en prend le chemin par defaut.
+3. On choisi une "phrase de passe" (passphrase) et on l'entre à 2 reprise
+4. Vous devez ensuite ajouter cette clé à votre ssh agent avec la commande  
+`eval "$(ssh-agent -s)"`   
+puis  
+`ssh-add ~"chemin/vers/votre/clé/ssh"`
+5. On ajoute maintenant cette clé à votre compte github
+   1. On copie le contenue de la clé ssh généré juste avant
+   2. Sur github, on va dans : photo profil du compte> paramètres > acces > clé SSH > nouvelle clé ssh/ajouter une clé ssh.
+   3. Voila quoi mettre dans les différents champs 
+      * Title : un titre pour votre clé qui en décrit l'origine et/ou l'usage
+      * Type de clé : authentification ou signature (je ne sais pas ce que ça change)
+      * Clé : coller le contenue de votre clé public ssh
+   4. cliquez sur "ajouter une clé ssh"
+6. Verifions que tout est en ordre.
+
+Et voilà, vous avez configuré votre clé SSH. Vous pouvez maintenant utiliser git avec Github en toute sécurité.
+
+Avec tout ça, vous êtes fins prêts pour utiliser git avec Github. On va voir comment faire ça tout de suite.
 
 ### 4.3 Votre premier remote repos
 
@@ -223,7 +318,7 @@ Maintenant que c'est fait, on a quelques petites choses à faire pour que git et
    `git clone "lien HTTPS ou SSH de votre repos" "nom du dossier de votre projet"` 
    ![alt text](./img/noob/image-10.png)
 
-Vous venez de cloner votre remote repos sur votre ordinateur : un dossier vient d'apparaitre.
+Vous venez de cloner votre remote repos sur votre ordinateur : un dossier vient d'apparaitre. C'est une opération très utile et surtout très courante, gardez la en tête.
 ![alt text](./img/noob/image-11.png)  
 Vous pouvez maintenant travailler sur votre projet. Nous verrons bientôt comment envoyer vos modifications sur Github. 
 
@@ -294,8 +389,8 @@ Precision : la mise à jour du working directory est automatique MAIS partielle.
 Vous avez vu que git est un outil puissant... Mais il peut être dangereux si vous ne faites pas attention. Voici quelques précautions à prendre pour éviter les problèmes :
 1. Evitez de créer 2 commits différents à 2 endroits différents en même temps... Pas clair ? Exemple : 
    1. Vous modifiez un fichier sur votre ordinateur et vous faites un commit.
-   2. Vous modifiez le même fichier sur Github et vous faites un commit. 
-   ==> Vous avez 2 versions différentes du même fichier... Et git ne sait pas laquelle garder.
+   2. Vous modifiez le même fichier sur Github et vous faites un commit.  
+   ==> Vous avez 2 versions différentes d'un même projet... Et git ne sait pas laquelle garder.
       * Le push ne fonctionnera pas car le depot distant aura un commit d'avance sur le depot local
       * Le pull ne fonctionnera pas car le depot local aura un commit d'avance sur le depot distant  
    
