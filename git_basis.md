@@ -2,6 +2,30 @@
 
 ## 1. C'est quoi git ?
 
+### Mise en situation :
+
+Un projet collaboratif à lieu avec péon 1, 2 et 3. Chacun travaille sur un fichier texte, les taches sont réparties et tout se passe bien... Enfin, sauf quand il s'agit de mettre en commun.  
+En tant normal, les projets collaboratifs s'organisent autour d'un dossier partager. Chacun y dépose ses fichiers, les autres les modifient et on se partage les fichiers modifiés.
+
+Et voilà ce qu'il peut se passer :
+
+Péon 1 : enregistre un fichier texte en disan "Windows c'est"  
+Péon 2 : Modifie le fichier texte pour ajouter " de la m*rde"  
+Péon 3 : Mais le péon 3 remodifie le fichier en même temps pour remplacer "Windows" par "Linux"
+
+A la finale : le fichier texte contient "Linux c'est de la m*rde"... Et ça c'est innaceptable !...  
+Enfin c'est surtout innaceptable parce que 
+* on peut pas revenir en arrière facilement, 
+* on n'a pas pu se coordonner au moment de rassembler les fichiers,
+* c'est le bordel !
+Sans oublier péon 4 qui perd ses fichiers du projet dans son pc et qui doit tout recommencer.
+
+Alors, si vous voulez pas passer pour des péons, il va falloir se renseigner un peu sur git !
+
+![alt text](image-32.png)   
+(C'est ça un péon... Et c'est aussi bête que ça en a l'air)
+### C'est quoi du coup ? 
+
 Git est un logiciel de versionning !  
 ...  
 ...  
@@ -19,50 +43,14 @@ Le premier choix est le plus pratique et le plus clair pour vous... Par contre a
 A l'inverse, le second choix est tout sauf pratique: vous vous retrouvez avec une tonne de fichiers, que vous ne modifierez pas, MAIS vous pouvez revenir en arrière à volonté.
 
 C'est là que le versionning intervient :
-- Vous avez un seul exemple de vos fichiers, mais vous pouvez revenir en arrière à volonté.
+- Vous avez un seul exemplaires de vos fichiers, mais vous pouvez revenir en arrière à volonté.
 - Vous avez un historique de vos modifications.
 
 C'est super... Mais comment ça marche exactement ?
 
 ## 2. Petite pause installation
 
-Avant de continuer, il va falloir installer Git sur votre ordinateur. Pour se faire, rendez-vous sur le site officiel de Git : [https://git-scm.com/](https://git-scm.com/). On va traiter ça en 2 partie : Windows et Linux.
-
-### 2.1. Windows
-![alt text](image-16.png)  
-Cliquez sur "Next"  
-![alt text](image-17.png)  
-Choisissez le dossier d'installation et cliquez sur "Next"  
-![alt text](image-18.png)  
-  
-![alt text](image-19.png)  
-  
-![alt text](image-21.png)  
-  
-![alt text](image-20.png)  
-  
-![alt text](image-22.png)  
-  
-![alt text](image-23.png)  
-  
-![alt text](image-24.png)  
-  
-![alt text](image-25.png)  
-  
-![alt text](image-26.png)  
-  
-![alt text](image-27.png)  
-  
-![alt text](image-28.png)  
-  
-![alt text](image-29.png)  
-  
-![alt text](image-30.png)  
-  
-![alt text](image-31.png)  
-
-
-### 2.2. Linux
+Avant de continuer, il va falloir installer Git sur votre ordinateur. Pour se faire, rendez-vous sur le site officiel de Git : [https://git-scm.com/](https://git-scm.com/).
 
 A voir avec les techniciens 
 
