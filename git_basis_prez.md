@@ -19,27 +19,64 @@ Le but de cette première formation est de permettre d'utiliser git de façon ba
 
 ## 2. Créer un repository
 
-Pour ça, on va commencer directement par un peu de pratique.
-### 2.1 En pratique
+Avant de commencer, on va devoir faire une petite configuration de git. En effet, avant toute chose, git doit savoir qui vous êtes. Peu importe les infos que vous mettrez dans l'étape à suivre, ça marchera... PAR CONTRE, quand on va faire le lien avec github, il faudra que les infos que vous mettez ici correspondent à celles de votre compte github. Ha... Vous en avez pas ? Bah allez en créer un alors ! 
+
+### 2.-1. S'inscrie à github
+
+Bon je vais pas vous exliquer comment faire, c'est assez simple. Rendez vous sur [le site de github]("https://github.com"). D'ailleurs utilisez votre mail ENSEA et mettez pas un prénom trop con...
+
+### 2.0. Installer, utiliser et configurez git
+#### 2.0.1. Installer git
+Rendez vous sur [le site officiel de git](https://git-scm.com/) et téléchargez la version correspondant à votre système d'exploitation.  
+*Je ne detaille pas les étapes d'installation, c'est assez simple : cliquez sur "next" jusqu'à la fin.*
+
+#### 2.0.2. Utiliser git
+
+Sur windows : ouvrez git bash
+Sur linux : ouvrez un terminal et taper `git` pour verifier si c'est installé
+
+Felicitations ! Vous avez installé git et êtes prêt à l'utiliser !
+
+#### 2.0.3. Configurer git
+
+Maintenant que c'est fait, vous allez entrer les commandes à suivre :  
+```git config --global user.name "votre nom github"```   
+```git config --global user.email "votre mail github"```
+
+Ca mérite une petite explication :
+
+Je penses que le principal (user.name et user.email) est assez clair. Ce qui l'est moins, c'est "--global".
+
+Il existe en fait 3 niveaux de configuration pour git :
+- --local : configuration pour un seul projet
+- --global : configuration pour tous les projets correspondant à l'utilisateur
+- --system : configuration pour tous les projets de votre machine (tous les utilisateurs)
+
+Super ! On peut maintenant commencer les choses serieuses.
+
+### 2.1 Créer un répository local (enfin)
+
 1. Commencez par installer Git sur votre machine : rendez vous sur [le site officiel de git](https://git-scm.com/) et téléchargez la version correspondant à votre système d'exploitation.  
    *Je ne detaille pas les étapes d'installation, c'est assez simple : cliquez sur "next" jusqu'à la fin.*
 2. Ouvrez git bash
 3. Choisissiez un dossier où vous voulez créer votre repository et entrez la commande  
-   ```cd "chemin du dossier"```
+   ```cd "chemin/du/dossier"```
 4. Ensuite, tapez la commande  
-   ```git init```
-5. Vous avez créé un repository local ! Félicitations ! 
+   ```git init```   
+Vous avez créé votre premier repository local ! Bravo !
 
-*Le fait que vous soyez dans un répos git est indiqué par un mot entre () dans votre invite de commande (ici master ou main)*
+Pour vous en assurez : verifiez que le dossier contient un dossier caché ".git" (sur windows, il faut modifier un paramète de l'affichage... Regardez sur internet si besoin). Si c'est le cas, c'est que tout s'est bien passé.
+
+Indice supplémentaire sous windows: un texte entre () apparait sur votre terminal, c'est le nom de la branche principale de votre repository (master, par défaut).
+
+*Je n'expliquerais pas ce qu'est une branche pour le moment, ce sera pour une prochaine session ;)*
 
 ### 2.2. Comment ça marche ?        
 
 1. La commande cd est un classique du bash : suivie d'un chemin, elle permet au terminal de se déplacer dans le dossier indiqué.
-2. git init, quant à lieu va créer un dossier caché ".git" dans le dossier ou il se trouve.
+2. git init, quant à lui, va créer un dossier caché ".git" dans le dossier ou il se trouve.
 
-Essayez de deviner ce que fait ce dossier (indice : supprimez le et actualisez votre terminal (en appyant juste sur entrer par exemple))
-
-Vous l'avez compris : le dossier .git contient toutes les informations nécessaires à git pour gérer les versions de votre projet. Il contient notament les commits... Qu'on va voir tout de suite !
+Le dossier .git contient toutes les informations nécessaires à git pour gérer les versions de votre projet. Il contient notament les commits... Qu'on va voir tout de suite !
 
 ## 3. Faire un commit
 
@@ -74,9 +111,9 @@ Voilà pour la base du commit ! Je vais vous montrer quelques autres commandes e
 
 #### 3.3.1. Ajouter/retirer plusieurs fichier/dossiers de l'index
 
-Petite exercice : 
-1. Ajoutez 1 autre fichier à votre dossier
-2. Modifier le contenu du premier fichier
+Petit exercice : 
+1. Ajoutez 1 autre fichier à votre dossier (via les commandes OU via l'explorateur de fichier)
+2. Modifier le contenu du premier fichier (nano "fichier" sur linux)
 3. Ajoutez les 2 fichiers à l'index
 4. Verifiez avec `git status`
 
@@ -90,12 +127,12 @@ Méthode 1:
 
 1. Méthode 2 :  
 ```git add "chemin relatif du fichier/fichier1.txt" "chemin relatif du fichier/fichier2.txt"```
-1. Méthode 3 :
+3. Méthode 3 :
 ```git add .``` ou ```git add --all```
 </details>  
 
 
-*La 3ème méthode permet d'ajouter tous les fichiers ayant subie une modification par rapport au fichier stocké en index.*
+*La 3ème méthode permet d'ajouter TOUS les fichiers ayant subie une modification par rapport au fichier stocké en index.*
 
 une fois fait : commitez avec "exercice ajout de fichiers multiples" comme message.
 
@@ -104,13 +141,12 @@ Nouvel exercice ajouter un dossier:
 2. Ajoutez le à l'index
 3. Entrez ```git status```
 
-Que remarquez vous ? Non, le dossier n'a pas été ajouté à l'index. Pourquoi ?
+Que remarquez vous ? Effectivement, le dossier n'a pas été ajouté à l'index. Pourquoi ?
 <details>
 <summary>Réponses</summary>
-Le dossier est vide : git ne prend pas en compte les dossiers vides. 
-</details>
 
-Solution ? Ajoutez un fichier dans le dossier et recommencez l'opération.
+Le dossier est vide : git ne prend pas en compte les dossiers vides. Solution ? Ajoutez un fichier dans le dossier puis entrer la commande `git add "chemin relatif du dossier/dossier/"`.
+</details>
 
 Une fois fait : commitez avec le message "exercice ajout de dossier".
 
@@ -118,8 +154,8 @@ Encore un exercice :
 
 1. Modifier le contenu du fichier1 et du fichier2
 2. Créer un fichier3
-3. Créer 3 dossier (avec un fichier) : dossier1, dossier2 et dossier3
-4. Ajouter le fichier1, le fichier2, le fichier3, le dossier1 et le dossier2 à l'index
+3. Créer 3 dossier contenant tous un fichier: dossier1, dossier2 et dossier3
+4. Ajouter le fichier1, le fichier2, le fichier3, le dossier1, dossier2 et dossier3 à l'index
 5. Mince, vous vous êtes trompé et vous ne souhaitez pas commiter le fichier 2 : retirez le de l'index
 6. Mince, vous vous êtes trompé et vous ne souhaitez pas commiter le dossier 1 : retirez le de l'index
 7. Finalement, vous ne garderez pas le fichier3 : retirez le de l'index et supprimez le du projet
@@ -144,6 +180,7 @@ Vous savez déjà faire les 4 premières étapes. Donc passons directement aux d
 
 - Pour retirer quelque chose de l'index, on utilise donc `git rm --cached`; quand il s'agit d'un dossier, on ajoute l'option `-r` qui signifie "recurissif" permettant de retirer toute l'arborescence du dossier.  
 - Pour supprimer un fichier/dossier du projet, on utilise `git rm` sans l'option `--cached`. Cela à donc l'effet du retrait de l'index et de la suppression du fichier/dossier du projet. (une fusion de la command `rm` et de la commande `git rm --cached`)
+- Pour des raisons que j'ignore, la commande `git rm`, peu importe les paramètres, necessite *parfois* un forcage symbolisé par l'ajout de l'option `-f` à la fin de la commande.
 
 Pour finir : commitez avec le message "exercice retrait d'element de l'index".
 </details>
@@ -177,24 +214,16 @@ ET VOILA ! Vous avez fait le tour des commandes de base pour les commits ! Féli
 
 Enfin on parle de GITHUB. OUI, il y a git dans le nom... Mais c'est pas pareil... Mais on va voir ça ! GitHub est un serveur distant qui stocke des répos... Et potentiellement les vôtres !
 
-### 4.1. S'inscrire sur Github
-
-Bon je vais pas vous exliquer comment faire, c'est assez simple. Rendez vous sur [le site de github]("https://github.com"). D'ailleurs utilisez votre mail ENSEA et mettez pas un prénom trop con...
-
 ### 4.2. Créer un répository
 
 Cliquez sur new, en haut a droite  
 ![alt text](img/image-8.png)  
-ou  
+OU  
 ![alt text](img/image-7.png)
 1. Choisissez le nom de votre repository identique à celui de votre dossier
 2. Choisisez public ou private (public sera mieux pour les projets) et ne selectionnez pas "initialize this repository with a README".
 
-### 4.3. Configurer votre git
-#### 4.3.1. En pratique
-Maintenant que tout est prêt coté github, il faut configurer votre git pour qu'il sache quel est votre compte github. Pour ça, entrez les commandes suivantes :  
-```git config --global user.name "votre nom github"```  
-```git config --global user.email "votre mail github"```
+### 4.3. Configurer votre git si vous êtes sur linux
 
 Si vous êtes sur Linux, l'opération est un peu différente, il faut également créer un clé SSH : 
 1. Entrez `ssh-keygen -t ed25519 -C "your_email@example.com"`
@@ -202,9 +231,11 @@ Si vous êtes sur Linux, l'opération est un peu différente, il faut également
 3. Entrez à 2 reprise un mot de passe (ou laissez vide pour ne pas en mettre)
 4. Vous devez ensuite ajouter la clé SSH à votre agent SSH : 
    1. Démarrez l'agent SSH : `eval "$(ssh-agent -s)"`
-   2. Ajoutez votre clé SSH à l'agent SSH : `ssh-add ~/.ssh/id_ed25519`
-5. Copiez le contenu de votre clé publique (nomDuFichier.pub)
-6. Rendez sur GitHub pour ajouter la clé SSH au compte github
+   2. Ajoutez votre clé SSH à l'agent SSH : `ssh-add ~/.ssh/nomDeVotreCléChoisieAvant`
+5. Regarder le resultat de votre commande ssh-keygen : un chemin doit s'y trouver... C'est celui menant à votre clé SSH. 
+   1. Entrez `cat "chemin de votre clé SSH/nomDeVotreCléChoisieAvant.pub"`
+   2. Copier l'entièreté du resultat de votre commande (qui doit ressembler à ça : `ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI...`)
+6. Rendez-vous sur GitHub pour ajouter la clé SSH au compte github
    1. photo profil du compte> paramètres > acces > clé SSH > nouvelle clé ssh/ajouter une clé ssh.
    2. Voila quoi mettre dans les différents champs 
       * Title : un titre pour votre clé qui en décrit l'origine et/ou l'usage
@@ -212,28 +243,20 @@ Si vous êtes sur Linux, l'opération est un peu différente, il faut également
       * Clé : coller le contenue de votre clé public ssh
    3. cliquez sur "ajouter une clé ssh"
 
-### 4.3.2 Que vient-on de faire ?
-
-Je penses que le principal (user.name et user.email) est assez clair. Ce qui l'est moins, c'est "--global".
-
-Il existe en fait 3 niveaux de configuration pour git :
-- --local : configuration pour un seul projet
-- --global : configuration pour tous les projets correspondant à l'utilisateur
-- --system : configuration pour tous les projets de votre machine (tous les utilisateurs)
-
-Pour la clé SSH, c'est plus compliqué, mais la seule chose à retenir c'est que sans, github ne peut pas communiquer de manière sécurisée avec votre machine... Donc elle communique pas du tout. 
-
 ### 4.4. Cloner un repository (git clone)
 
 La première opération à connaire dans l'utilisation de github est comment cloner un repository. Pour ça, rien de plus simple :
 
-1. Allez dans le dossier de votre choix avec le terminal
-2. Entrez la commande ```git clone "lien du repository" "nom du dossier de destination"```
+1. Allez sur la page de votre repository github pour récupérer le lien du repository  
+   - Si vous venez de le créer : ![alt text](img/image-9.png)
+   - Cliquez sur `code` sinon
+2. Si vous êtes :
+   1. Sous Windows : cliquez sur HTTPS et copiez le lien fourni
+   2. Sous Linuw : cliquez sur SSH et copiez le lien fourni
+3. Dans votre terminal, tapez `cd ..` pour venir au dossier parent de votre repository pour ne pas cloner le répo... Dans le répo d'origne.
+4. Entrez la commande `git clone "lien du repository" "nom du dossier de destination différent du répo déjà existant"`
 
-Vous trouverez le lien du repository sur la page de votre repository github, ici : 
-![alt text](img/image-9.png)
-
-Tadam ! Un dossier vient d'apparaitre. Dirigez vous dedans et vous verrez que tout le contenu de votre repository github est là ! Cette fois, c'est vite, mais le terminal reconnait bien le répo. Felicitation !
+Tadam ! Un dossier vient d'apparaitre. Dirigez vous dedans et vous verrez que tout le contenu de votre repository github est là ! Cette fois, c'est vide, mais le terminal reconnait bien le répo. Felicitation !
 
 Aucune explication necessaire ici, on passe à la suite !
 
@@ -245,10 +268,15 @@ Maintenant que vous avez cloné un repository, vous allez pouvoir pusher vos com
 
 Lors de chaque premier push sur un repository, il faut configurer le remote répository. Pour se faire : 
 1. rendez vous avec votre terminal dans le répo que vous aviez créé tout à l'heure (avec tous les exos chiants là). 
-2. Tapez: `git remote add origin "lien du repository"`
+2. Tapez: `git remote add origin "lien du repository"` (https pour windows/ssh pour linux)
 3. Vous pouvez verifier l'état de votre remote avec `git remote -v`
-4. Ensuite, tapez: `git push -u origin <branche principale>`
-*Ou la branche principale est le nom entre () dans votre terminal.*
+4. Ensuite, tapez: `git push -u origin <branche principale>`   
+*Ou la branche principale est le nom entre () dans votre terminal. Et si vous n'en voyez pas : entrer master à place de <branche principale>*  
+**ON FAIT SAUTER LES <>**
+
+A l'une de ces étapes, il peut vous être demandé de vous authentifier : entrez vos identifiants github.
+
+Pour linux, lors d'une des étapes, il peut vous être demandé de vérifier l'authenticité de github. Entrez "yes" pour continuer, puis identifiez vous !
 
 Et voilà ! Votre repository github est à jour ! Félicitations ! vous pouvez dailleurs verifier sur la page de votre repository github.
 
@@ -256,7 +284,7 @@ Et voilà ! Votre repository github est à jour ! Félicitations ! vous pouvez d
 
 Il suffit de taper `git push` pour mettre à jour votre repository github.
 
-Essayer de push quelque chose en indexant seulement un fichier. 
+Essayer de push quelque chose en indexant seulement un fichier...
 
 <details>
 <summary>Que se passe t il ? </summary>
@@ -265,10 +293,15 @@ Rien : normal on ne peut que push des commits. Donc si vous n'avez pas commité,
 
 ### 4.6. Puller depuis un repository github (git pull)
 
-Pour puller, c'est assez simple :
-1. Entrez la commande `git pull`
+Pour puller, c'est assez simple. Vous vous rappelez le dossier cloner tout à l'heure ? Et bien on va s'en servir
 
-Et voilà. Votre repository local est à jour.
+1. Rendez vous dans le dossier cloné  
+   `cd ..`  
+   `cd "nom du dossier cloné"`
+
+2. Entrez la commande `git pull`
+
+Et voilà. Votre repository local est à jour... ENFIN... Oui... Mais non ! En fait, si vous avez fait gaffe, le dossier que vous avez cloné est vide... MAIS sur la branche main. Mais depuis votre dernier push, vous avez commité sur la branche master... Donc il faut changer de branche ! Mais ça, ce sera pour une prochaine fois :D
 
 ## 5. Conclusion
 
