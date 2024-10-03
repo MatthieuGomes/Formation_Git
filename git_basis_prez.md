@@ -318,9 +318,17 @@ A l'une de ces étapes, il peut vous être demandé de vous authentifier : entre
 
 Pour linux, lors d'une des étapes, il peut vous être demandé de vérifier l'authenticité de github. Entrez "yes" pour continuer, puis identifiez vous !
 
+#### 4.5.2. Que vient on de faire ? 
+
+1. git remote add origin "lien du repository" : permet de lier votre repository local à un repository distant sous le nom "origin". En gros ça permet de dire à git où il doit pusher vos futures commits.
+2. git push -u origin <branche actuelle>
+   1. git push : pousse vos commits sur le repository distant enregistré sous le nom "origin".
+   2. -u origin <branche actuelle>: permet de lier votre branche locale (branche actuelle) à une branche distante du même nom. Si elle n'exite pas, elle sera créée.
+
+
 Et voilà ! Votre repository github est à jour ! Félicitations ! vous pouvez dailleurs verifier sur la page de votre repository github.
 
-#### 4.5.2. Les pushs suivants
+#### 4.5.3. Les pushs suivants
 
 Il suffit de taper `git push` pour mettre à jour votre repository github.
 
