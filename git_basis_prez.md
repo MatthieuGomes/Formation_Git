@@ -1,4 +1,16 @@
 # Git pour les noobs
+
+## 0. Avant propos :
+
+Je vous donne infos pour le bon déroulé du cours :
+- coller dans le terminal, ce fait avec shift+insert
+- copier dans le terminal, ce fait avec ctrl+insert
+- pour naviguer dans une commande que vous êtes en train de taper, utilisez les flèhes directionnelles : le clic est inutile. 
+- pour selectionner des morceaux de commandes que vous êtes en train de taper, utilisez shift+flèche directionnelle.
+- pour annuler une commande que vous auriez lancé : ctrl+c
+- si par malheur vous entrez dans vi, il faut taper ':q!' pour en sortir.
+- quand je mettrais <> dans une commande, il faut ignorer les <> et les remplacer par ce qu'il y a dedans.
+
 ## 1. A quoi ça sert git ?
 
 Si vous voulez :
@@ -100,10 +112,12 @@ Pour bien comprendre ce qu'il se passe, il faut comprendre comment git gère les
 
 Maintenant qu'on sait ça, on peut avancer : 
 
-1. git add : cette commande permet d'ajouter un fichier de votre working directory à l'index.
+1. git add : cette commande permet d'ajouter une modification de votre working directory à l'index.
 2. git commit -m "message":
    1. commit : cette partie de la commande pousse le fichier de l'index au repository 
    2. -m "message": permet de rajouter un message à votre commit, afin de plus facilement les retrouver dans le futur.
+
+**L'information importante à retenir est que git ne sauvegarde que les MODIFICATIONS, pas les fichiers !**
 
 Voilà pour la base du commit ! Je vais vous montrer quelques autres commandes en lien avec les commits pour vous éviter quelques problèmes et vous offrir un peu plus de liberté.
 
@@ -208,6 +222,33 @@ Votre working dir n'est pas exactement votre index. Vous pouvez possédez 3 vers
 Faites bien attention à ça !
 </details>
 
+### 3.4. Petit point sur les réponses de git status
+
+Vous avez du le remarquer, mais git status vous donne des informations sur l'état de votre repository. Voici un petit récapitulatif des réponses possibles :
+
+#### 3.4.1. On branch ...
+
+Vous annonce dans quelle branche vous êtes actuellement... Et non, je ne vais pas expliquer ce que c'est aujourd'hui... Sachez juste que c'est important mais qu'on va pas changer de branche aujourd'hui donc vous serez tous dans master ou main.
+
+#### 3.4.2. Your branch is ...
+  * ***up to date :*** votre branche est à jour.  
+
+Il peut également y avoir 2 autres possibilités mais vous les comprendrez plus tard, je me contente de les nommer pour que vous ne soyez pas surpris :
+  * ***ahead 'origin/<branch_en_cours>' by <nombre_de_commits> commits :***
+  * ***behind 'origin/<branch_en_cours>' by <nombre_de_commits> commits :*** 
+
+#### 3.4.2. Changes to be committed
+
+Les modifications affichés ici sont celles que vous avez ajouté dans l'index et sont prêtes à être commité.
+
+#### 3.4.3. Changes not staged for commit
+
+Les modifications affichés ici sont celles que vous avez faites dans votre working directory mais que vous n'avez pas ajouté à l'index sur des fichiers qui aurait déjà eu des modifications commités précédemment. (C'est différent de la dernière catégorie...)
+
+#### 3.4.4. Untracked files
+
+Les modifications affichés ici sont celles que vous avez faites dans votre working directory mais que vous n'avez pas ajouté à l'index sur des fichiers qui n'ont jamais été commités.
+
 ET VOILA ! Vous avez fait le tour des commandes de base pour les commits ! Félicitations ! (presque, mais c'est assez... juste faites gaffe à ce que vous commitez, svp)
 
 ## 4. Communiquer avec un serveur distant
@@ -270,9 +311,8 @@ Lors de chaque premier push sur un repository, il faut configurer le remote rép
 1. rendez vous avec votre terminal dans le répo que vous aviez créé tout à l'heure (avec tous les exos chiants là). 
 2. Tapez: `git remote add origin "lien du repository"` (https pour windows/ssh pour linux)
 3. Vous pouvez verifier l'état de votre remote avec `git remote -v`
-4. Ensuite, tapez: `git push -u origin <branche principale>`   
-*Ou la branche principale est le nom entre () dans votre terminal. Et si vous n'en voyez pas : entrer master à place de <branche principale>*  
-**ON FAIT SAUTER LES <>**
+4. Ensuite, tapez: `git push -u origin <branche actuelle>`   
+*Ou la branche principale est le nom entre () dans votre terminal. Et si vous n'en voyez pas : entrer master à place de <branche actuelle>*  
 
 A l'une de ces étapes, il peut vous être demandé de vous authentifier : entrez vos identifiants github.
 
@@ -291,7 +331,16 @@ Essayer de push quelque chose en indexant seulement un fichier...
 Rien : normal on ne peut que push des commits. Donc si vous n'avez pas commité, vous ne pouvez pas pusher.
 </details> 
 
-### 4.6. Puller depuis un repository github (git pull)
+#### 4.6. Nouveau Petit point sur les réponses de git status
+
+Comme expliqué plus tot (cf. [3.4](#34-petit-point-sur-les-réponses-de-git-status)), 2 réponses de git status vous étaient "incompréhensibles"... Mais comme vous savez maintenant ce qu'est un répo distant, vous pouvez comprendre ces réponses :   
+***your branch is ...***
+* ***ahead 'origin/<branch_en_cours>' by <nombre_de_commits> commits :*** votre branche <branch_en_cours> possède <nombre_de_commits> commits non pushés sur le répos distant.
+* ***behind 'origin/<branch_en_cours>' by <nombre_de_commits> commits :*** votre branche <branch_en_cours> est en retard de <nombre_de_commits> commits par rapport au répo distant.
+
+Le premier cas de figure à lieu si vous venez de commiter certains changement et qu evous ne les avez pas encore transmis à github et vous êtes donc le seul à 
+
+### 4.7. Puller depuis un repository github (git pull)
 
 Pour puller, c'est assez simple. Vous vous rappelez le dossier cloner tout à l'heure ? Et bien on va s'en servir
 
